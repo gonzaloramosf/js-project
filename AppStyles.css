@@ -1,0 +1,19 @@
+.item {
+    width: 24em;
+    margin: 1em;
+}
+
+header {
+    width: 100%;
+    background-color: #212529;
+}
+
+#logo {
+    width: 32px;
+    height: 32px;
+    background: url("images/cocodrilo.png");
+    font-size: 0;
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+}
