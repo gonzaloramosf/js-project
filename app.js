@@ -4,53 +4,50 @@ const Database = () => {
             id: 1,
             title: 'Peugeot 308',
             price: 1800000, 
-            detailPage: "itemPage.html",
+            detail: "Peugeot 308 blanco gasolero",
         },
         {
             id: 2,
             title: 'Peugeot 208',
             price: 2200000,
-            detailPage: "itemPage.html", 
+            detail: "Peugeot 208 azul naftero", 
         },
         {
             id: 3,
             title: 'Peugeot 307',
             price: 1000000, 
-            detailPage: "itemPage.html",
+            detail: "Peugeot 307 gris naftero",
         }
     ];
-
     ShowItems(items);
 }
 
 const ShowItems = (items) => {
     // calling section for items in html 
     const itemsContainer = document.querySelector(".items");
-
     items.forEach((item) => {
         // item features container
         let itemContainer = document.createElement("div");
         itemContainer.className = "card item";
 
-        // adding item.title
+        // adding item title
         let itemTitle = document.createElement("h4");
         itemTitle.textContent= `${item.title}`;
         
-        // adding item.img
+        // adding item img
 
-        // adding ite.price
+        // adding item price
         let itemPrice = document.createElement("span");
         itemPrice.textContent = `${item.price}`;
 
-        // button product page
+        // adding item btn
         let itemButton = document.createElement("button");
         itemButton.textContent = "View details";
-        // navigate to product page
-        itemButton.addEventListener("click", () => {
-            Item(item);
-            console.log('ocu pado');
-        });
-
+        itemButton.className = "btn btn-primary";
+        itemButton.addEventListener("click", () => { 
+            ActivateModal(item)
+        })
+        
         // adding features
         itemContainer.appendChild(itemTitle);
         // item.img
@@ -62,45 +59,47 @@ const ShowItems = (items) => {
     })
 }
 
-const Item = (item) => {
+const ActivateModal = (item) => {
+    let modalWrap = null;
+    const showModal = () => {
+        if (modalWrap !== null) {
+            modalWrap.remove();
+        }
+        modalWrap = document.createElement("div");
 
-    // calling section for item in html 
-    const itemDetailContainer = document.querySelector(".item");
+        let modalBox = document.createElement("div");
+        modalBox.className = "modal modal-content";
+        let modalDialog = document.createElement("div");
+        modalDialog.className = "modal-dialog";
+        let modalContent = document.createElement("div");
+        modalContent.className = "modal-content";
 
-    // item detail container
-    let itemContainer = document.createElement("div");
+        modalContent
 
-    // item.title 
-    let itemTitle = document.createElement("h4");
-    itemTitle.textContent= `${item.title}`;
-    // item.img
-    // item.price
-    let itemPrice = document.createElement("span");
-    itemPrice.textContent = `${item.price}`;
+        let itemTitle = document.createElement("h4");
+        itemTitle.textContent= `${item.title}`;
+        let itemPrice = document.createElement("span");
+        itemPrice.textContent = `${item.price}`;
+        let itemDetail = document.createElement("p");
+        itemDetail.textContent = `${item.detail}`
 
-    // adding features
-    itemContainer.appendChild(itemTitle);
-    // item.img
-    itemContainer.appendChild(itemPrice);
-
-    itemDetailContainer.appendChild(itemContainer);
-    // itemContainer whit all features
-    
-    // item count
-
-    // add to cart
+        // adding features
+        modalBox.appendChild(modalDialog);
+        modalContent.appendChild(itemTitle);
+        modalContent.appendChild(itemPrice);
+        modalContent.appendChild(itemDetail);
+        modalDialog.appendChild(modalContent);
+        modalWrap.appendChild(modalBox);
+        document.body.append(modalWrap);
+        
+        let modal = new bootstrap.Modal(modalWrap.querySelector('.modal'));
+        modal.show();
+    } 
+    showModal();
 }
 
 const AddToCart = (itemId) => {
     console.log(itemId);
 }
-
 // initialization
 Database();
-
-
-
-// itemButton.addEventListener("click", () => {
-//     let itemId = item.id;
-//     AddToCart(itemId);
-// });
