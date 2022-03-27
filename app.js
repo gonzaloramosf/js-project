@@ -1,3 +1,5 @@
+const cart = [];
+
 const Database = () => {
     const items = [
         {
@@ -41,18 +43,27 @@ const ShowItems = (items) => {
         itemPrice.textContent = `${item.price}`;
 
         // adding item btn
-        let itemButton = document.createElement("button");
-        itemButton.textContent = "View details";
-        itemButton.className = "btn btn-primary";
-        itemButton.addEventListener("click", () => { 
+        let detailsButton = document.createElement("button");
+        detailsButton.textContent = "View details";
+        detailsButton.className = "btn btn-primary";
+        detailsButton.addEventListener("click", () => { 
             ActivateModal(item)
+        })
+
+        // adding add to cart btn
+        let toCartButton = document.createElement("button");
+        toCartButton.textContent = "Add to cart";
+        toCartButton.className = "btn btn-secondary";
+        toCartButton.addEventListener("click", () => {
+            AddToCart(item);
         })
         
         // adding features
         itemContainer.appendChild(itemTitle);
         // item.img
         itemContainer.appendChild(itemPrice);
-        itemContainer.appendChild(itemButton);
+        itemContainer.appendChild(detailsButton);
+        itemContainer.appendChild(toCartButton);
 
         // itemContainer whit all features
         itemsContainer.appendChild(itemContainer);
@@ -98,8 +109,13 @@ const ActivateModal = (item) => {
     showModal();
 }
 
-const AddToCart = (itemId) => {
-    console.log(itemId);
+const AddToCart = (item) => {
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+
+    let storedInCart = JSON.parse(localStorage.getItem('cart'));
+    console.log(storedInCart);
 }
 // initialization
 Database();
