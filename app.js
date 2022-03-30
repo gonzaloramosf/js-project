@@ -1,4 +1,5 @@
-const cart = [];
+let cart = [];
+const cartLocalStorage = window.localStorage;
 
 const Database = () => {
     const items = [
@@ -111,11 +112,14 @@ const ActivateModal = (item) => {
 
 const AddToCart = (item) => {
     cart.push(item);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    cartLocalStorage.setItem('cart', JSON.stringify(cart));
+}
 
-
-    let storedInCart = JSON.parse(localStorage.getItem('cart'));
-    console.log(storedInCart);
+const LoadStoredCart = () => {
+    if (cartLocalStorage.getItem('cart') !== null) {
+        cart = JSON.parse(cartLocalStorage.getItem('cart'));
+    }
 }
 // initialization
+LoadStoredCart();
 Database();
