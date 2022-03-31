@@ -8,18 +8,21 @@ const Database = () => {
             title: 'Peugeot 308',
             price: 1800000, 
             detail: "Peugeot 308 blanco gasolero",
+            image: "images/marshallEarbuds.png",
         },
         {
             id: 2,
             title: 'Peugeot 208',
             price: 2200000,
             detail: "Peugeot 208 azul naftero", 
+            image: "images/marshallEarbuds.png",
         },
         {
             id: 3,
             title: 'Peugeot 307',
             price: 1000000, 
             detail: "Peugeot 307 gris naftero",
+            image: "images/marshallEarbuds.png",
         }
     ];
     ShowItems(items);
@@ -38,6 +41,8 @@ const ShowItems = (items) => {
         itemTitle.textContent= `${item.title}`;
         
         // adding item img
+        let itemImage = document.createElement("img");
+        itemImage.src = `${item.image}`;
 
         // adding item price
         let itemPrice = document.createElement("span");
@@ -48,7 +53,7 @@ const ShowItems = (items) => {
         detailsButton.textContent = "View details";
         detailsButton.className = "btn btn-primary";
         detailsButton.addEventListener("click", () => { 
-            ActivateModal(item)
+            ActivateModal(item);
         })
 
         // adding add to cart btn
@@ -61,7 +66,7 @@ const ShowItems = (items) => {
         
         // adding features
         itemContainer.appendChild(itemTitle);
-        // item.img
+        itemContainer.appendChild(itemImage);
         itemContainer.appendChild(itemPrice);
         itemContainer.appendChild(detailsButton);
         itemContainer.appendChild(toCartButton);
@@ -86,14 +91,12 @@ const ActivateModal = (item) => {
         let modalContent = document.createElement("div");
         modalContent.className = "modal-content";
 
-        modalContent
-
         let itemTitle = document.createElement("h4");
         itemTitle.textContent= `${item.title}`;
         let itemPrice = document.createElement("span");
         itemPrice.textContent = `${item.price}`;
         let itemDetail = document.createElement("p");
-        itemDetail.textContent = `${item.detail}`
+        itemDetail.textContent = `${item.detail}`;
 
         // adding features
         modalBox.appendChild(modalDialog);
@@ -111,15 +114,13 @@ const ActivateModal = (item) => {
 }
 
 const AddToCart = (item) => {
-    cart.push(item);
-    cartLocalStorage.setItem('cart', JSON.stringify(cart));
+    cart.push(item) && cartLocalStorage.setItem('cart', JSON.stringify(cart));
 }
 
 const LoadStoredCart = () => {
-    if (cartLocalStorage.getItem('cart') !== null) {
-        cart = JSON.parse(cartLocalStorage.getItem('cart'));
-    }
+    cartLocalStorage.getItem('cart') !== null ? cart = JSON.parse(cartLocalStorage.getItem('cart')) : console.log('cart no exist');
 }
+
 // initialization
 LoadStoredCart();
 Database();
