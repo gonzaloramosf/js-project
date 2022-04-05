@@ -61,6 +61,11 @@ const ShowItems = (items) => {
         toCartButton.textContent = "Add to cart";
         toCartButton.className = "btn btn-secondary";
         toCartButton.addEventListener("click", () => {
+            Toastify({
+                text: "Added to cart",
+                duration: 2000,
+                className: "toastNotification",
+            }).showToast();
             AddToCart(item);
         })
         
@@ -85,24 +90,38 @@ const ActivateModal = (item) => {
         modalWrap = document.createElement("div");
 
         let modalBox = document.createElement("div");
-        modalBox.className = "modal modal-content";
+        modalBox.className = "modal fade";
         let modalDialog = document.createElement("div");
         modalDialog.className = "modal-dialog";
         let modalContent = document.createElement("div");
         modalContent.className = "modal-content";
+        let modalHeader = document.createElement("div");
+        modalHeader.className = "modal-header";
+        let modalBody = document.createElement("div");
+        modalBody.className = "modal-body";
+        let modalFooter = document.createElement("div");
+        modalBody.className = "modal-footer";
+        // let modalCloseBtn = document.createElement("button");
+        // modalCloseBtn.className = "close hide";
 
         let itemTitle = document.createElement("h4");
-        itemTitle.textContent= `${item.title}`;
+        itemTitle.textContent = `${item.title}`;
+        itemTitle.className = "modal-title";
         let itemPrice = document.createElement("span");
         itemPrice.textContent = `${item.price}`;
         let itemDetail = document.createElement("p");
         itemDetail.textContent = `${item.detail}`;
 
+
         // adding features
         modalBox.appendChild(modalDialog);
-        modalContent.appendChild(itemTitle);
-        modalContent.appendChild(itemPrice);
-        modalContent.appendChild(itemDetail);
+        modalHeader.appendChild(itemTitle);
+        // modalHeader.appendChild(modalCloseBtn);
+        modalBody.appendChild(itemDetail);
+        modalFooter.appendChild(itemPrice);
+        modalContent.appendChild(modalHeader);
+        modalContent.appendChild(modalBody);
+        modalContent.appendChild(modalFooter);
         modalDialog.appendChild(modalContent);
         modalWrap.appendChild(modalBox);
         document.body.append(modalWrap);

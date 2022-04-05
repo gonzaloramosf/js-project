@@ -17,3 +17,8 @@ header {
     top: 10px;
     z-index: 1;
 }
+
+.toastNotification {
+    margin-top: 60px;
+    margin-right: 180px;
+}
