@@ -1,34 +1,21 @@
 let cart = [];
 const cartLocalStorage = window.localStorage;
 
-const Database = () => {
-    const items = [
-        {
-            id: 1,
-            title: 'Peugeot 308',
-            price: 1800000, 
-            detail: "Peugeot 308 blanco gasolero",
-            image: "images/marshallEarbuds.png",
-        },
-        {
-            id: 2,
-            title: 'Peugeot 208',
-            price: 2200000,
-            detail: "Peugeot 208 azul naftero", 
-            image: "images/marshallEarbuds.png",
-        },
-        {
-            id: 3,
-            title: 'Peugeot 307',
-            price: 1000000, 
-            detail: "Peugeot 307 gris naftero",
-            image: "images/marshallEarbuds.png",
-        }
-    ];
-    ShowItems(items);
+const Database = async () => {
+    fetch("./database.json")
+        .then ((res) => res.json())
+        .then ((data) => {
+            // const items = data.items;
+            // console.log(items)
+            ShowItems(data.items);
+        })
+    //
 }
 
 const ShowItems = (items) => {
+    let cartIcon = document.querySelector(".call-cart");
+    cartIcon.addEventListener("click", () => ModalCart());
+
     // calling section for items in html 
     const itemsContainer = document.querySelector(".items");
     items.forEach((item) => {
@@ -51,22 +38,26 @@ const ShowItems = (items) => {
         // adding item detail btn
         let detailsButton = document.createElement("button");
         detailsButton.textContent = "View details";
-        detailsButton.className = "btn btn-primary";
+        detailsButton.className = "btn btn-secondary m-1";
         detailsButton.addEventListener("click", () => { 
             ActivateModal(item);
         })
 
+        // Number of items in cart
+        let itemsInCart = document.querySelector(".items-in-cart");
+        itemsInCart.textContent = `${cart.length}`;
+        
         // adding add to cart btn
         let toCartButton = document.createElement("button");
         toCartButton.textContent = "Add to cart";
-        toCartButton.className = "btn btn-secondary";
+        toCartButton.className = "btn btn-primary m-1";
         toCartButton.addEventListener("click", () => {
             Toastify({
                 text: "Added to cart",
                 duration: 2000,
                 className: "toastNotification",
             }).showToast();
-            AddToCart(item);
+            AddToCart(item, itemsInCart);
         })
         
         // adding features
@@ -98,7 +89,7 @@ const ActivateModal = (item) => {
                 let modalBody = document.createElement("div");
                 modalBody.className = "modal-body";
                 let modalFooter = document.createElement("div");
-                modalBody.className = "modal-footer";
+                modalFooter.className = "modal-footer";
             let modalCloseBtn = document.createElement("button");
             modalCloseBtn.className = "close";
             modalCloseBtn.textContent = "x";
@@ -123,7 +114,6 @@ const ActivateModal = (item) => {
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
     modalContent.appendChild(modalFooter);
-    // modal content
     modalDialog.appendChild(modalContent);
 
     // adding modalBox whit all content - styles
@@ -133,8 +123,69 @@ const ActivateModal = (item) => {
     modal.show();
 }
 
-const AddToCart = (item) => {
+const AddToCart = (item, itemsInCart) => {
     cart.push(item) && cartLocalStorage.setItem('cart', JSON.stringify(cart));
+    itemsInCart.textContent = `${cart.length}`;
+}
+
+const ModalCart = () => {
+    // show modal cart with items
+    let modalWrap = null;
+    if (modalWrap !== null) {
+        modalWrap.remove();
+    }
+    modalWrap = document.createElement("div");
+
+    let modalBox = document.createElement("div");
+    modalBox.className = "modal fade";
+        let modalDialog = document.createElement("div");
+        modalDialog.className = "modal-dialog modal-dialog-centered";
+            let modalContent = document.createElement("div");
+            modalContent.className = "modal-content";
+                let modalHeader = document.createElement("div");
+                modalHeader.className = "modal-header";
+                let modalBody = document.createElement("div");
+                modalBody.className = "modal-body";
+                let modalFooter = document.createElement("div");
+                modalFooter.className = "modal-footer";
+            let modalCloseBtn = document.createElement("button");
+            modalCloseBtn.className = "close";
+            modalCloseBtn.textContent = "x";
+            modalCloseBtn.addEventListener("click", () => {modal.hide()});
+    // --  
+    let cartTitle = document.createElement("h3")
+    cartTitle.textContent = "Cart";
+    cartTitle.className = "modal-title";
+    let cartTotal = document.createElement("span");
+    cartTotal.textContent = `Total: `;
+
+    for (let i=0; i < cart.length; i++) {
+        let itemAdded = document.createElement("p");
+        let item = cart[i];
+        itemAdded.textContent = `${item.title}`;
+        modalBody.appendChild(itemAdded);
+    }
+
+    // modalbox content
+    modalBox.appendChild(modalDialog);
+    modalHeader.appendChild(cartTitle);
+    modalFooter.appendChild(cartTotal);
+
+    // adding modal content
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalBody);
+    modalContent.appendChild(modalFooter);
+    modalDialog.appendChild(modalContent);
+
+    // adding modalBox whit all content - styles
+    modalWrap.appendChild(modalBox);
+    document.body.append(modalWrap);
+    let modal = new bootstrap.Modal(modalWrap.querySelector('.modal'));
+    modal.show();
+}
+
+const ClearCart = () => {
+    // cart = [];
 }
 
 const LoadStoredCart = () => {

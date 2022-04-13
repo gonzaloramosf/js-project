@@ -1,0 +1,25 @@
+{
+    "items": [
+        {
+            "id": 1,
+            "title": "Peugeot 308",
+            "price": 1800000, 
+            "detail": "Peugeot 308 blanco gasolero",
+            "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 2,
+            "title": "Peugeot 208",
+            "price": 2200000,
+            "detail": "Peugeot 208 azul naftero", 
+            "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 3,
+            "title": "Peugeot 307",
+            "price": 1000000, 
+            "detail": "Peugeot 307 gris naftero",
+            "image": "Images/marshallEarbuds.png"
+        }
+    ]
+}

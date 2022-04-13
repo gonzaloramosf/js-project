@@ -11,7 +11,7 @@ header {
 #logo {
     width: 32px;
     height: 32px;
-    background: url("images/cocodrilo.png");
+    background: url("Images/cocodrilo.png");
     font-size: 0;
     position: absolute;
     top: 10px;
@@ -29,4 +29,14 @@ header {
     font-size: 20px;
     padding: 1rem;
     border: 0;
+}
+
+.cart-icon {
+    font-size: 1.5rem; 
+    color: #B8AE79;
+    cursor: pointer;
+}
+
+.items-in-cart {
+    font-size: 14px;
 }
