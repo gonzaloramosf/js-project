@@ -40,3 +40,12 @@ header {
 .items-in-cart {
     font-size: 14px;
 }
+
+li {
+    list-style: none;
+}
+
+ul li:first-child {
+    padding-bottom: 2px;
+    color: #888888;
+}

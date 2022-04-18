@@ -1,16 +1,13 @@
 let cart = [];
+let total = 0;
 const cartLocalStorage = window.localStorage;
 
 const Database = async () => {
     fetch("./database.json")
         .then ((res) => res.json())
-        .then ((data) => {
-            // const items = data.items;
-            // console.log(items)
-            ShowItems(data.items);
-        })
+        .then ((data) => {ShowItems(data.items);})
     //
-}
+} 
 
 const ShowItems = (items) => {
     let cartIcon = document.querySelector(".call-cart");
@@ -40,7 +37,7 @@ const ShowItems = (items) => {
         detailsButton.textContent = "View details";
         detailsButton.className = "btn btn-secondary m-1";
         detailsButton.addEventListener("click", () => { 
-            ActivateModal(item);
+            ModalDetails(item);
         })
 
         // Number of items in cart
@@ -71,7 +68,7 @@ const ShowItems = (items) => {
     })
 }
 
-const ActivateModal = (item) => {
+const ModalDetails = (item) => {
     let modalWrap = null;
     if (modalWrap !== null) {
         modalWrap.remove();
@@ -126,9 +123,11 @@ const ActivateModal = (item) => {
 const AddToCart = (item, itemsInCart) => {
     cart.push(item) && cartLocalStorage.setItem('cart', JSON.stringify(cart));
     itemsInCart.textContent = `${cart.length}`;
+    CalculateTotal();
 }
 
 const ModalCart = () => {
+    let inCart = [];
     // show modal cart with items
     let modalWrap = null;
     if (modalWrap !== null) {
@@ -157,13 +156,28 @@ const ModalCart = () => {
     cartTitle.textContent = "Cart";
     cartTitle.className = "modal-title";
     let cartTotal = document.createElement("span");
-    cartTotal.textContent = `Total: `;
+    cartTotal.textContent = `Total: $ ${total}`;
 
     for (let i=0; i < cart.length; i++) {
+        let id = cart[i].id;
+        let itemAddedContainer = document.createElement("div");
+        itemAddedContainer.className = "row";
         let itemAdded = document.createElement("p");
+        let itemAddedPrice = document.createElement("span");
         let item = cart[i];
-        itemAdded.textContent = `${item.title}`;
-        modalBody.appendChild(itemAdded);
+        if (id = inCart.find(item => item.id === id)) {
+            console.log("add quantity added");
+            let repeated = document.querySelector("."+item.id);
+            repeated.textContent = `x2 ${item.title}`;
+        } else {
+            itemAdded.textContent = `${item.title}`;
+            itemAdded.className = `${item.id}`;
+            itemAddedPrice.textContent = `${item.price}`;
+            itemAddedContainer.appendChild(itemAdded);
+            itemAddedContainer.appendChild(itemAddedPrice);   
+        }
+        modalBody.appendChild(itemAddedContainer);
+        inCart.push(item);
     }
 
     // modalbox content
@@ -184,8 +198,19 @@ const ModalCart = () => {
     modal.show();
 }
 
+const CalculateTotal = () => {
+    for (let i=0; i <  cart.length; i++) {
+        total = total + cart[i].price;
+    }
+}
+
 const ClearCart = () => {
-    // cart = [];
+    // emptying
+    cart = [];
+    // update
+    ModalCart();
+    // cleaning localStorage
+    localStorage.clear();
 }
 
 const LoadStoredCart = () => {
@@ -194,4 +219,5 @@ const LoadStoredCart = () => {
 
 // initialization
 LoadStoredCart();
+CalculateTotal();
 Database();

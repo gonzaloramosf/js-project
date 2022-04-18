@@ -20,6 +20,48 @@
             "price": 1000000, 
             "detail": "Peugeot 307 gris naftero",
             "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 4,
+            "title": "Peugeot 4008",
+            "price": 3000000, 
+            "detail": "Peugeot 4008 azul naftero",
+            "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 5,
+            "title": "Peugeot 4008",
+            "price": 3000000, 
+            "detail": "Peugeot 4008 azul naftero",
+            "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 6,
+            "title": "Peugeot 4008",
+            "price": 3000000, 
+            "detail": "Peugeot 4008 azul naftero",
+            "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 7,
+            "title": "Peugeot 4008",
+            "price": 3000000, 
+            "detail": "Peugeot 4008 azul naftero",
+            "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 8,
+            "title": "Peugeot 4008",
+            "price": 3000000, 
+            "detail": "Peugeot 4008 azul naftero",
+            "image": "Images/marshallEarbuds.png"
+        },
+        {
+            "id": 9,
+            "title": "Peugeot 4008",
+            "price": 3000000, 
+            "detail": "Peugeot 4008 azul naftero",
+            "image": "Images/marshallEarbuds.png"
         }
     ]
 }
