@@ -121,13 +121,24 @@ const ModalDetails = (item) => {
 }
 
 const AddToCart = (item, itemsInCart) => {
-    cart.push(item) && cartLocalStorage.setItem('cart', JSON.stringify(cart));
-    itemsInCart.textContent = `${cart.length}`;
+    let quantity = 1;
+    const itemsIsInCart = cart.find((itemAdded) => itemAdded.id === item.id);
+    if (itemsIsInCart) {
+        cart.map((newItem) => {
+            if(newItem.id === item.id) {
+                item.quantity = item.quantity + 1;
+                console.log('modify quantity to item') 
+            }
+        })
+    } else {
+        item.quantity = quantity;
+        cart.push(item) && cartLocalStorage.setItem('cart', JSON.stringify(cart));
+        itemsInCart.textContent = `${cart.length}`;
+    }
     CalculateTotal();
 }
 
 const ModalCart = () => {
-    let inCart = [];
     // show modal cart with items
     let modalWrap = null;
     if (modalWrap !== null) {
@@ -159,25 +170,18 @@ const ModalCart = () => {
     cartTotal.textContent = `Total: $ ${total}`;
 
     for (let i=0; i < cart.length; i++) {
-        let id = cart[i].id;
         let itemAddedContainer = document.createElement("div");
         itemAddedContainer.className = "row";
         let itemAdded = document.createElement("p");
         let itemAddedPrice = document.createElement("span");
+
         let item = cart[i];
-        if (id = inCart.find(item => item.id === id)) {
-            console.log("add quantity added");
-            let repeated = document.querySelector("."+item.id);
-            repeated.textContent = `x2 ${item.title}`;
-        } else {
-            itemAdded.textContent = `${item.title}`;
-            itemAdded.className = `${item.id}`;
-            itemAddedPrice.textContent = `${item.price}`;
-            itemAddedContainer.appendChild(itemAdded);
-            itemAddedContainer.appendChild(itemAddedPrice);   
-        }
+
+        itemAdded.textContent = `x${item.quantity} ${item.title}`;
+        itemAddedPrice.textContent = `${item.price}`;
+        itemAddedContainer.appendChild(itemAdded);
+        itemAddedContainer.appendChild(itemAddedPrice);
         modalBody.appendChild(itemAddedContainer);
-        inCart.push(item);
     }
 
     // modalbox content
@@ -215,9 +219,43 @@ const ClearCart = () => {
 
 const LoadStoredCart = () => {
     cartLocalStorage.getItem('cart') !== null ? cart = JSON.parse(cartLocalStorage.getItem('cart')) : console.log('cart no exist');
+    let items = cart.reduce((a,v) => {
+        a[v.id] ?  a[v.id].push(v) : a[v.id] = [v];
+        return a;
+    }, {});
+    cartWithoutDuplicates = items;
 }
 
 // initialization
 LoadStoredCart();
 CalculateTotal();
 Database();
+
+
+/*
+let itemAddedContainer = document.createElement("div");
+itemAddedContainer.className = "row";
+let itemAdded = document.createElement("p");
+let itemAddedPrice = document.createElement("span");
+
+for (let i=0; i < cart.length; i++) {
+    let item = cart[i];
+    let quantity = cart.filter(item => item);
+
+
+    if (quantity.length < 1) {
+        itemAdded.textContent = `x${quantity.length} ${item.title}`;
+        itemAddedPrice.textContent = `${item.price}`;
+        itemAddedContainer.appendChild(itemAdded);
+        itemAddedContainer.appendChild(itemAddedPrice);
+        modalBody.appendChild(itemAddedContainer);
+    }
+    else {           
+        itemAdded.textContent = `x${quantity.length} ${item.title}`;
+        itemAddedPrice.textContent = `${item.price}`;
+        itemAddedContainer.appendChild(itemAdded);
+        itemAddedContainer.appendChild(itemAddedPrice);
+        modalBody.appendChild(itemAddedContainer);
+    }
+}
+*/
