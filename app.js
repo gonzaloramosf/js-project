@@ -23,6 +23,7 @@ const ShowItems = (items) => {
         // adding item title
         let itemTitle = document.createElement("h4");
         itemTitle.textContent= `${item.title}`;
+        itemTitle.className = "mt-2 mb-2"
         
         // adding item img
         let itemImage = document.createElement("img");
@@ -30,7 +31,8 @@ const ShowItems = (items) => {
 
         // adding item price
         let itemPrice = document.createElement("span");
-        itemPrice.textContent = `${item.price}`;
+        itemPrice.textContent = `us$ ${item.price}`;
+        itemPrice.className = "text-end me-2 text-dark";
 
         // adding item detail btn
         let detailsButton = document.createElement("button");
@@ -47,7 +49,7 @@ const ShowItems = (items) => {
         // adding add to cart btn
         let toCartButton = document.createElement("button");
         toCartButton.textContent = "Add to cart";
-        toCartButton.className = "btn btn-primary m-1";
+        toCartButton.className = "btn btn-primary m-1 mb-2";
         toCartButton.addEventListener("click", () => {
             Toastify({
                 text: "Added to cart",
@@ -88,7 +90,7 @@ const ModalDetails = (item) => {
                 let modalFooter = document.createElement("div");
                 modalFooter.className = "modal-footer";
             let modalCloseBtn = document.createElement("button");
-            modalCloseBtn.className = "close";
+            modalCloseBtn.className = "close text-danger";
             modalCloseBtn.textContent = "x";
             modalCloseBtn.addEventListener("click", () => {modal.hide()});
     // --  
@@ -97,7 +99,8 @@ const ModalDetails = (item) => {
     itemTitle.textContent = `${item.title}`;
     itemTitle.className = "modal-title";
     let itemPrice = document.createElement("span");
-    itemPrice.textContent = `${item.price}`;
+    itemPrice.textContent = `us$ ${item.price}`;
+    itemPrice.className = "text-end me-2 text-dark";
     let itemDetail = document.createElement("p");
     itemDetail.textContent = `${item.detail}`;
 
@@ -159,36 +162,88 @@ const ModalCart = () => {
                 let modalFooter = document.createElement("div");
                 modalFooter.className = "modal-footer";
             let modalCloseBtn = document.createElement("button");
-            modalCloseBtn.className = "close";
+            modalCloseBtn.className = "close text-danger";
             modalCloseBtn.textContent = "x";
             modalCloseBtn.addEventListener("click", () => {modal.hide()});
     // --  
-    let cartTitle = document.createElement("h3")
-    cartTitle.textContent = "Cart";
-    cartTitle.className = "modal-title";
 
-    for (let i=0; i < cart.length; i++) {
-        let itemAddedContainer = document.createElement("div");
-        itemAddedContainer.className = "row";
-        let itemAdded = document.createElement("p");
-        let itemAddedPrice = document.createElement("span");
-        let item = cart[i];
-        total = total + (item.price * item.quantity);
+    if (cart.length === 0) {
+        console.log("mostrar cart is empty");
+        let cartTitle = document.createElement("h3")
+        cartTitle.textContent = "Cart";
+        cartTitle.className = "modal-title";
+        let cartIsEmpty = document.createElement("p");
+        cartIsEmpty.textContent = "Cart is empty, add items";
+        cartIsEmpty.className = "text-info"
+        let cartTotal = document.createElement("span");
+        cartTotal.textContent = `Total: $ ${total}`;
+        let emptyCart = document.createElement("button");
+        emptyCart.className = "btn btn-warning";
+        emptyCart.textContent = `Clear`;
+        emptyCart.addEventListener("click",() => {
+            ClearCart();
+            modal.hide();
+        });
 
-        itemAdded.textContent = `x${item.quantity} ${item.title}`;
-        itemAddedPrice.textContent = `${item.price}`;
-        itemAddedContainer.appendChild(itemAdded);
-        itemAddedContainer.appendChild(itemAddedPrice);
-        modalBody.appendChild(itemAddedContainer);
+        // modalbox content
+        modalBox.appendChild(modalDialog);
+        modalHeader.appendChild(cartTitle);
+        modalHeader.appendChild(modalCloseBtn);
+        modalBody.appendChild(cartIsEmpty);
+        modalFooter.appendChild(cartTotal);
+        modalFooter.appendChild(emptyCart);
+    } 
+    else {
+        let cartTitle = document.createElement("h3")
+        cartTitle.textContent = "Cart";
+        cartTitle.className = "modal-title";
+    
+        for (let i=0; i < cart.length; i++) {
+            let item = cart[i];
+            let itemAddedContainer = document.createElement("div");
+            itemAddedContainer.className = "row border-bottom pb-2";
+            let itemAdded = document.createElement("h5");
+            itemAdded.className = "mt-2"
+            let priceAndClearContainer = document.createElement("div");
+            priceAndClearContainer.className = "text-end";
+            let itemAddedPrice = document.createElement("span");
+            itemAddedPrice.className = "text-secondary me-4";
+            let deleteItem = document.createElement("button");
+            deleteItem.className = "btn btn-danger pe-4 ps-4";
+            deleteItem.textContent = "x";
+            deleteItem.addEventListener("click", () => {
+                DeleteItemInCart(i);
+                modal.hide();
+            });
+            priceAndClearContainer.appendChild(itemAddedPrice);
+            priceAndClearContainer.appendChild(deleteItem);
+            total = total + (item.price * item.quantity);
+    
+            itemAdded.textContent = `x${item.quantity} ${item.title}`;
+            itemAddedPrice.textContent = `us$ ${item.price * item.quantity}`;
+            itemAddedContainer.appendChild(itemAdded);
+            itemAddedContainer.appendChild(priceAndClearContainer);
+            modalBody.appendChild(itemAddedContainer);
+        }
+    
+        let cartTotal = document.createElement("span");
+        cartTotal.textContent = `Total: $ ${total}`;
+        cartTotal.className = "me-3";
+        let emptyCart = document.createElement("button");
+        emptyCart.className = "btn btn-warning";
+        emptyCart.textContent = `Clear`;
+        emptyCart.addEventListener("click",() => {
+            ClearCart();
+            modal.hide();
+        });
+    
+        // modalbox content
+        modalBox.appendChild(modalDialog);
+        modalHeader.appendChild(cartTitle);
+        modalHeader.appendChild(modalCloseBtn);
+        modalFooter.appendChild(cartTotal);
+        modalFooter.appendChild(emptyCart);
     }
-
-    let cartTotal = document.createElement("span");
-    cartTotal.textContent = `Total: $ ${total}`;
-
-    // modalbox content
-    modalBox.appendChild(modalDialog);
-    modalHeader.appendChild(cartTitle);
-    modalFooter.appendChild(cartTotal);
 
     // adding modal content
     modalContent.appendChild(modalHeader);
@@ -206,11 +261,26 @@ const ModalCart = () => {
 const ClearCart = () => {
     // emptying
     cart = [];
-    // update
+    // update modal
     ModalCart();
     // cleaning localStorage
     localStorage.clear();
+    // items in cart count
+    let itemsInCart = document.querySelector(".items-in-cart");
+    itemsInCart.textContent = `${cart.length}`
 }
+
+const DeleteItemInCart = (index) => {
+    // remove
+    cart.splice(index, 1);
+    // updating storage
+    cartLocalStorage.setItem('cart', JSON.stringify(cart));
+    // update modal
+    ModalCart();
+    // items in cart count
+    let itemsInCart = document.querySelector(".items-in-cart");
+    itemsInCart.textContent = `${cart.length}`
+}   
 
 const LoadStoredCart = () => {
     cartLocalStorage.getItem('cart') !== null ? cart = JSON.parse(cartLocalStorage.getItem('cart')) : console.log('cart no exist');

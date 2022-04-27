@@ -8,6 +8,11 @@ header {
     background-color: #212529;
 }
 
+a {
+    text-decoration: none;
+    color: #8C8D8E;
+}
+
 #logo {
     width: 32px;
     height: 32px;
@@ -48,4 +53,365 @@ li {
 ul li:first-child {
     padding-bottom: 2px;
     color: #888888;
+}
+
+/* Mobile */
+@media screen and (max-width: 500px){
+    #logo {
+        width: 32px;
+        height: 32px;
+        background: url("Images/cocodrilo.png");
+        font-size: 0;
+        position: absolute;
+        margin-left: 45%;
+        top: 10px;
+        z-index: 1;
+    }
+
+    .contactBanner{
+        min-width: 100%;
+        height: 700px;
+        background-image: url(Images/contactBanner.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .contactCards{
+        margin: auto;
+        margin-top: 5em;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        max-width: 1400px;
+    }
+    
+    .contactCards div {
+        background-color: white;
+        border-top: black solid 1px;
+        margin: 1em 3em 1em 3em;
+        width: 320px;
+        height: 200px;
+    }
+    
+    .contactCards div h3 {
+        margin-top: 4px;
+        margin-bottom: 1em;
+    }
+    
+    .contactCards div p{
+        padding: 1rem 0rem 1rem 0rem;
+    }
+    
+    .contactCards div p:hover{
+        cursor: pointer;
+    }
+    
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        padding-top: 4em;
+    }
+    
+    .arrow {
+        color: black;
+        font-weight: bolder;
+    }
+
+    footer {
+        width: 100%;
+        height: fit-content;
+        background-color: #222222;
+        margin-top: 6em;
+    }
+
+    footer div:first-child{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    footer ul {
+        margin: 1em 0em 1em 1.5em;
+        color: #8C8D8E;
+    }
+
+    footer li {
+        padding-bottom: 1em;
+    }
+
+    footer li:hover{
+        cursor: pointer;
+        color: #FFFFFF;
+    }
+
+    footer ul li:first-child{
+        color: #FFFFFF;
+    }
+}
+/* Tablet */
+@media screen and (min-width: 501px ) and (max-width: 1023px){
+    #logo {
+        width: 32px;
+        height: 32px;
+        background: url("Images/cocodrilo.png");
+        font-size: 0;
+        position: absolute;
+        margin-left: 40%;
+        top: 10px;
+        z-index: 1;
+    }
+
+    .contactBanner{
+        min-width: 100%;
+        height: 700px;
+        background-image: url(Images/contactBanner.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .contactCards{
+        margin: auto;
+        margin-top: 5em;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        max-width: 1400px;
+    }
+    
+    .contactCards div {
+        background-color: white;
+        border-top: black solid 1px;
+        margin: 1em 2em 1em 2em;
+        width: 340px;
+        height: 200px;
+    }
+    
+    .contactCards div h3 {
+        margin-top: 4px;
+        margin-bottom: 1em;
+    }
+    
+    .contactCards div p{
+        padding: 1rem 0rem 1rem 0rem;
+    }
+    
+    .contactCards div p:hover{
+        cursor: pointer;
+    }
+    
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        padding-top: 4em;
+    }
+    
+    .arrow {
+        color: black;
+        font-weight: bolder;
+    }
+
+    footer {
+        width: 100%;
+        height: 240px;
+        background-color: #222222;
+        margin-top: 6em;
+    }
+
+    footer div:first-child{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    footer ul {
+        margin: 2em;
+        color: #8C8D8E;
+    }
+
+    footer li {
+        padding-bottom: 1em;
+    }
+
+    footer li:hover{
+        cursor: pointer;
+        color: #FFFFFF;
+    }
+
+    footer ul li:first-child{
+        color: #FFFFFF;
+    }
+}
+/* Medium Desktops*/
+@media screen and (min-width: 1024px ) and (max-width: 1480px) {
+    .contactBanner{
+        min-width: 100%;
+        height: 700px;
+        background-image: url(Images/contactBanner.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .contactCards{
+        margin: auto;
+        margin-top: 5em;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        max-width: 1400px;
+    }
+    
+    .contactCards div {
+        background-color: white;
+        border-top: black solid 1px;
+        margin: 1em 3em 1em 3em;
+        width: 400px;
+        height: 200px;
+    }
+    
+    .contactCards div h3 {
+        margin-top: 4px;
+        margin-bottom: 1em;
+    }
+    
+    .contactCards div p{
+        padding: 1rem 0rem 1rem 0rem;
+    }
+    
+    .contactCards div p:hover{
+        cursor: pointer;
+    }
+    
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        padding-top: 4em;
+    }
+    
+    .arrow {
+        color: black;
+        font-weight: bolder;
+    }
+
+    footer {
+        width: 100%;
+        height: 300px;
+        background-color: #222222;
+        margin-top: 6em;
+    }
+
+    footer div:first-child{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    footer ul {
+        margin: 3em 4em 4em 4em;
+        color: #8C8D8E;
+    }
+
+    footer li {
+        padding-bottom: 1em;
+    }
+
+    footer li:hover{
+        cursor: pointer;
+        color: #FFFFFF;
+    }
+
+    footer ul li:first-child{
+        color: #FFFFFF;
+    }
+}
+/* Large Desktops */
+@media screen and (min-width: 1481px){
+    .contactBanner{
+        min-width: 100%;
+        height: 700px;
+        background-image: url(Images/contactBanner.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .contactCards{
+        margin: auto;
+        margin-top: 5em;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        max-width: 1400px;
+    }
+    
+    .contactCards div {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-top: black solid 1px;
+        margin: 1em 3em 1em 3em;
+        width: 500px;
+        height: 200px;
+    }
+    
+    .contactCards div h3 {
+        margin-top: 4px;
+        margin-bottom: 1em;
+    }
+    
+    .contactCards div p{
+        padding: 1rem 0rem 1rem 0rem;
+    }
+    
+    .contactCards div p:hover{
+        cursor: pointer;
+    }
+    
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        padding-top: 4em;
+    }
+    
+    .arrow {
+        color: black;
+        font-weight: bolder;
+    }
+
+    footer {
+        width: 100%;
+        height: 300px;
+        background-color: #222222;
+        margin-top: 6em;
+    }
+
+    footer div:first-child{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    footer ul {
+        margin: 3em 4em 4em 4em;
+        color: #8C8D8E;
+    }
+
+    footer li {
+        padding-bottom: 16px;
+    }
+
+    footer li:hover{
+        cursor: pointer;
+        color: #FFFFFF;
+    }
+
+    footer ul li:first-child{
+        color: #FFFFFF;
+    }
 }

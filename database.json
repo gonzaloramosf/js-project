@@ -2,66 +2,45 @@
     "items": [
         {
             "id": 1,
-            "title": "Peugeot 308",
-            "price": 1800000, 
-            "detail": "Peugeot 308 blanco gasolero",
-            "image": "Images/marshallEarbuds.png"
+            "title": "Marshall Minor III",
+            "price": 125, 
+            "detail": "BLUETOOTH 5.2: Minor III is truly wireless, giving you the absolute freedom of listening without wires, while delivering the same powerful audio. 25 HOURS OF WIRELESS PLAYTIME: The earbuds hold 5 hours and the portable charging case carries four additional charges so you can slip the earbuds into the case for some extra power when needed",
+            "image": "Images/minorIII.png"
         },
         {
             "id": 2,
-            "title": "Peugeot 208",
-            "price": 2200000,
-            "detail": "Peugeot 208 azul naftero", 
-            "image": "Images/marshallEarbuds.png"
+            "title": "Marshall Major IV",
+            "price": 149,
+            "detail": "Major IV delivers the signature Marshall sound that you’ve come to expect. Custom-tuned dynamic drivers deliver roaring bass, smooth mids and brilliant treble for a rich, unrivalled sound that you’ll never want to turn off. 80+ solid hours of wireless playtime with quick-charge capability.", 
+            "image": "Images/majorIV.jpg"
         },
         {
             "id": 3,
-            "title": "Peugeot 307",
-            "price": 1000000, 
-            "detail": "Peugeot 307 gris naftero",
-            "image": "Images/marshallEarbuds.png"
+            "title": "Marshall Stanmore II",
+            "price": 370, 
+            "detail": "Larger than life sound it's perfect for any room big or small Built with advanced components It produces clean and precise Audio even at the highest levels.",
+            "image": "Images/stanmoreII.jpg"
         },
         {
             "id": 4,
-            "title": "Peugeot 4008",
-            "price": 3000000, 
-            "detail": "Peugeot 4008 azul naftero",
-            "image": "Images/marshallEarbuds.png"
+            "title": "Marshall Woburn II",
+            "price": 549, 
+            "detail": "Larger than life sound - with high trebles, handles low base with ease and clear mid range. Customize your sound - fine-tune your music to meet your requirements. Just use the Marshall Bluetooth app or the analogue controls on your speakers top panel to perfect your sound according to the room you’re in. ",
+            "image": "Images/woburn.jpg"
         },
         {
             "id": 5,
-            "title": "Peugeot 4008",
-            "price": 3000000, 
-            "detail": "Peugeot 4008 azul naftero",
-            "image": "Images/marshallEarbuds.png"
+            "title": "Marshall Motif",
+            "price": 199, 
+            "detail": "CANCEL THE NOISE, AMPLIFY THE SOUND: Set your own level of active noise cancellation and Transparency for a truly personal listening experience.RELIABLE PLAYTIME WITH WIRELESS CHARGING: Each earbud holds 4.5 hours of wireless playtime with full A.N.C. and the portable charging case provides 20 total hours of playtime on a single charge. Wireless charging also makes it even easier to charge and go",
+            "image": "Images/motif.jpg"
         },
         {
             "id": 6,
-            "title": "Peugeot 4008",
-            "price": 3000000, 
-            "detail": "Peugeot 4008 azul naftero",
-            "image": "Images/marshallEarbuds.png"
-        },
-        {
-            "id": 7,
-            "title": "Peugeot 4008",
-            "price": 3000000, 
-            "detail": "Peugeot 4008 azul naftero",
-            "image": "Images/marshallEarbuds.png"
-        },
-        {
-            "id": 8,
-            "title": "Peugeot 4008",
-            "price": 3000000, 
-            "detail": "Peugeot 4008 azul naftero",
-            "image": "Images/marshallEarbuds.png"
-        },
-        {
-            "id": 9,
-            "title": "Peugeot 4008",
-            "price": 3000000, 
-            "detail": "Peugeot 4008 azul naftero",
-            "image": "Images/marshallEarbuds.png"
+            "title": "Marshall Emberton",
+            "price": 150, 
+            "detail": "Rich, clear and loud, like the artist intended. Emberton utilizes True Stereophonic, a unique form of multi-directional sound from Marshall. Experience absolute 360° sound where every spot is a sweet spot. By separating out the spatial content of stereo recordings, Emberton produces a sound much larger than its size and out performs most speakers in its class",
+            "image": "Images/emberton.jpg"
         }
     ]
 }
