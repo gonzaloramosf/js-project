@@ -126,6 +126,7 @@ const ModalDetails = (item) => {
 const AddToCart = (item, itemsInCart) => {
     let quantity = 1;
     const itemsIsInCart = cart.find((itemAdded) => itemAdded.id === item.id);
+    // cart without duplicates
     if (itemsIsInCart) {
         cart.map((newItem) => {
             if(newItem.id === item.id) {
